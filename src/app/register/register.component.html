@@ -1,0 +1,93 @@
+<div class="container">
+    <div class="container form">
+        <h2 class="fw-bold text-secondary my-3">Create An Account</h2>
+        <form [formGroup]="register" (ngSubmit)="onSubmit()">
+            <div class="my-2 text-center text-success" [class.d-none]="!registered">
+                Your account has been created successfully, <br>
+                Please Click here to <a class="fw-bold" (click)="login()">LogIn</a>
+            </div>
+            <div class="d-flex justify-content-between">
+                <mat-form-field class="half-width" appearance="outline" color="accent">
+                    <mat-label>Username</mat-label>
+                    <input type="text" matInput formControlName="username"  placeholder="Enter Username">
+                    <mat-error *ngIf="username?.errors?.pattern">
+                        Username cannot containe white spcaes and Special Chars otherthan @,#,.,*,&
+                    </mat-error>
+                    <mat-error *ngIf="username?.invalid && username?.errors?.required">
+                        Username is <strong>must</strong>
+                    </mat-error>
+                    <mat-error *ngIf="username?.errors?.forbiddenName">
+                        Username "{{ username?.errors?.forbiddenName.value }}" is <strong>not allowed</strong>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="half-width" appearance="outline" color="accent">
+                    <mat-label>Email Address</mat-label>
+                    <input type="email" matInput formControlName="email" (keyup)="emailExist(email.value)"  placeholder="Enter Valid Email, Ex. pat@example.com">
+                    <mat-error *ngIf="email?.errors?.email">
+                        Please enter valid Email
+                    </mat-error>
+                    <mat-error *ngIf="email?.errors?.required">
+                        Email is <strong>required</strong>
+                    </mat-error>
+                    <small class="text-danger" *ngIf="emailAlreadyExist">
+                        Email <strong>already Exist</strong>
+                    </small>
+                </mat-form-field>
+            </div>
+            <div class="d-flex justify-content-between">
+                <mat-form-field class="half-width" appearance="outline" color="accent">
+                    <mat-label>First Name</mat-label>
+                    <input type="text" matInput formControlName="firstname"  placeholder="Enter Firstname">
+                    <mat-error *ngIf="firstname?.errors?.pattern">
+                        Name should contain only Alphabets without space
+                    </mat-error>
+                    <mat-error *ngIf="firstname?.invalid && firstname?.errors?.required">
+                        Firstname is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="half-width" appearance="outline" color="accent">
+                    <mat-label>Last Name</mat-label>
+                    <input type="text" matInput formControlName="lastname"  placeholder="Enter Lastname">
+                    <mat-error *ngIf="lastname?.errors?.pattern">
+                        Name should contain only Alphabets without space
+                    </mat-error>
+                    <mat-error *ngIf="lastname?.invalid && lastname?.errors?.required">
+                        Lastname is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="d-flex justify-content-between">
+                <mat-form-field class="half-width" appearance="outline" color="accent">
+                    <mat-label>Password</mat-label>
+                    <input formControlName="password" [type]="hide ? 'password' : 'text'" matInput  placeholder="Password must contain A-Z & a-z & 0-9">
+                    <span mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </span>
+                    <mat-error *ngIf="password?.errors?.pattern">
+                        Password must contain 6-14 chars containing atleast one Uppercase,Lowercase letter and Digit
+                    </mat-error>
+                    <mat-error *ngIf="password?.errors?.required">
+                        Password is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="half-width" appearance="outline" color="accent" >
+                    <mat-label>Confirm Password</mat-label>
+                    <input formControlName="confPass" [type]="hide ? 'password' : 'text'" matInput  placeholder="Password must contain A-Z & a-z & 0-9">
+                    <span mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </span>
+                    <!-- {{register.errors?.misMatch && !confPass?.errors?.required}} -->
+                    <mat-error *ngIf="register.errors?.misMatch && !confPass?.errors?.required">
+                        must match
+                    </mat-error>
+                    <mat-error *ngIf="confPass?.errors?.required">
+                        Confirm Password is <strong>required</strong>
+                    </mat-error>
+                    <small class="text-danger" *ngIf="register.errors?.misMatch && !confPass?.errors?.required">Password Must match</small>
+                </mat-form-field>
+            </div>
+            <span class="text-secondary">Already have an account ? Click here to <a class="fw-bold" (click)="login()">LogIn</a></span>
+            <button class="my-2 float-end" [disabled]="register.invalid || emailAlreadyExist" type="submit" mat-raised-button>Register</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+<!-- -------------Login Modal--------------- -->
+<div class="Modal" #close [class.active] = "activeClass" id="Login-Modal">
+    <span class="float-end"  (click)="closeLogin()"><mat-icon matSuffix class=" close-btn" >add_circle</mat-icon></span>
+    <h4 class="modal-title">Login to Manage Your Todos</h4>
+    <span class="d-block text-center text-danger" id="error"></span>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <!-- <div>
+            <input type="text" />
+            <img src="~/images/login-user.png" alt=" " />
+        </div>
+        <span class="text-danger" asp-validation-for="Email"></span>
+        <div>
+            <img src="~/images/lock.png" />
+            <input type="password" asp-for="Password" />
+        </div> -->
+            <div class="text-danger text-center my-2" [class.d-none]="!invalidCredentials">Oops! Invalid credentials!! Please try again</div>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Username</mat-label>
+              <input type="text" matInput formControlName="username" placeholder="Enter Username">
+              <mat-icon matSuffix>account_box</mat-icon>
+              <mat-error *ngIf="username.errors?.required">
+                  Username is required
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Password</mat-label>
+              <input type="password" formControlName="password" matInput placeholder="Enter Password">
+              <mat-icon matSuffix>lock</mat-icon>
+              <mat-error *ngIf="password.errors?.required">
+                Password is required
+            </mat-error>
+            </mat-form-field>
+        <div><input type="checkbox" class="mr-3" asp-for="RememberMe" id="remember-me" /><label for="remember-me">Remember Me</label></div>
+        <button type="submit" mat-raised-button>LogIn</button>
+    </form>
+    <div class="text-center mt-4"><a href="#" id="password-reset">Forgot password ?</a></div>
+    <div class="text-center">Don't have an account ? <a routerLink="register">Create an account</a></div>
+</div>

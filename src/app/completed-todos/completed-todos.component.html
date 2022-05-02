@@ -1,0 +1,16 @@
+<div class="container">
+    <h3 class="my-3 fw-bold text-secondary">Completed Todos</h3>
+    <div class="" *ngFor="let todo of todos; index as i">
+        <div *ngIf="!todo.active" >
+            <div class="d-flex justify-content-between">
+                <h3 class="text-secondary fw-bold">{{i+1 + " " + todo.title}}</h3>
+                <div class="buttons">
+                    <button class="btn btn-sm btn-success mx-2 pe-none">Completed</button>
+                    <button class="btn btn-sm btn-danger" (click)="onClick(todo)">Delete</button>
+                </div>
+            </div>
+            <p>{{todo.desc}}</p>
+            <hr>
+        </div>
+    </div>
+</div>

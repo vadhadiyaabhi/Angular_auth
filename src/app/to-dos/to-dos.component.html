@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="d-flex justify-content-between my-3">
+        <h2 class="text-center fw-bold text-secondary">My Todos List</h2>
+        <button class="btn btn-primary rounded-pill">+ Add New Todo</button>
+    </div>
+
+
+    <div class="container">
+        <app-add-todos (addTodo)="addNewTodo($event)"></app-add-todos>
+    </div>
+    <div>{{this.todos.length}}</div>
+    <div *ngIf="this.todos.length === 0; else elseBloc">No todos to display</div>
+    
+    <ng-template #elseBloc>
+        <h2 class="text-center text-secondary fw-bold">Your todos</h2>
+        <div *ngFor="let todo of todos; index as i" class="container">
+            <div *ngIf="!todo.active; else elseBlock">
+                <!-- <app-completed-todos [todo]="todo" [i]="i" (deleteTodo)="deleteTodo($event)" ></app-completed-todos> -->
+            </div>
+            <ng-template #elseBlock>
+                <app-todo-item [todo]='todo' [i]='i' (todoDelete)="deleteTodo($event)" (todoComplete)="completeTodo($event)"></app-todo-item>
+            </ng-template>
+        </div>
+    </ng-template>
+</div>
