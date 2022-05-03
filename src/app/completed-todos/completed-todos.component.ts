@@ -33,5 +33,6 @@ export class CompletedTodosComponent implements OnInit {
     //   localStorage.setItem("todos", JSON.stringify(this.todos))
     // }
     this._todoService.deleteTodo(todo);
+    this.todos = this._todoService.getTodos();
   }
 }
