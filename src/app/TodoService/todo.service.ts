@@ -34,6 +34,7 @@ export class TodoService {
     todo.user_id = this._authService.getLoggedInUserID();
     console.log(todo.user_id);
     this.todos.push(todo);
+    console.log(this.todos);
     localStorage.setItem("todos", JSON.stringify(this.todos));
   }
 
@@ -43,6 +44,9 @@ export class TodoService {
       this.todos.splice(index, 1);
       localStorage.setItem("todos", JSON.stringify(this.todos));
     }
+    // const index = this.todos.indexOf(todo);
+    // this.todos[index].active = false;
+    // localStorage.setItem("todos", JSON.stringify(this.todos));
   }
 
   completeTodo(todo: Todo){

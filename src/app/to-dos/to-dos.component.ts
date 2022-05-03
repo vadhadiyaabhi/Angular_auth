@@ -38,6 +38,7 @@ export class ToDosComponent implements OnInit {
     //   localStorage.setItem("todos", JSON.stringify(this.todos));
     // }
     this._todoService.deleteTodo(todo);
+    this.todos = this._todoService.getTodos();
   }
 
   addNewTodo(todo: Todo){
@@ -45,6 +46,8 @@ export class ToDosComponent implements OnInit {
     // this.todos.push(todo);
     // localStorage.setItem("todos", JSON.stringify(this.todos));
     this._todoService.addTodo(todo);
+    this.todos = this._todoService.getTodos();
+    
   }
 
   completeTodo(todo: Todo){
