@@ -8,6 +8,7 @@ import { CompletedTodosComponent } from '../completed-todos/completed-todos.comp
 import { AddTodosComponent } from '../add-todos/add-todos.component';
 import { TodoItemComponent } from '../todo-item/todo-item.component';
 import { TodoRoutingModule } from '../todo-routing.module';
+import { MaterialModule } from '../material/material.module';
 
 
 
@@ -21,7 +22,8 @@ import { TodoRoutingModule } from '../todo-routing.module';
   imports: [
     CommonModule,
     TodoRoutingModule,
-    FormsModule
+    FormsModule,
+    MaterialModule
   ]
 })
 export class TodosModule { }
